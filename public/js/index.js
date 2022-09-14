@@ -5,6 +5,8 @@
 
 const logIn = document.getElementById("logIn");
 const logInContainerClose = document.getElementById("logInContainerClose");
+const logInSubmit = document.getElementById("submit");
+const welcomeContainer = document.getElementById("welcome");
 
 logIn.addEventListener("click", ()=>{
     document.getElementById("logInContainer").style.top = "17%";
@@ -12,4 +14,12 @@ logIn.addEventListener("click", ()=>{
 
 logInContainerClose.addEventListener("click", ()=>{
     document.getElementById("logInContainer").style.top = "-100vh";
+})
+
+logInSubmit.addEventListener("click", ()=> {
+    const email = document.getElementById("email").value;
+    welcomeContainer.innerHTML += "Welcome " + email;
+    document.getElementById("logInContainer").style.top = "-100vh";
+    
+
 })
