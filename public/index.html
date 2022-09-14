@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Seashell Liquidators</title>
     <link href="./css/index.css" type="text/css" rel="stylesheet">
+    <script src="./js/index.js" type="text/javascript" defer></script>
 </head>
 <body>
     <div id="wrapper">
@@ -15,7 +16,7 @@
             <div id="navContainer">
                 <nav>
                     <ul>
-                        <li><a>Log In</a></li>
+                        <li><a id="logIn">Log In</a></li>
                         <li><a>Sign Up</a></li>
                         <li><a><img src="./img/shopping-cart.png" id="shoppingCart" </a></li>
                     </ul>
@@ -26,7 +27,7 @@
             <ul>
                 <li>
                     <a><img src="./img/shell01.jpg"></a>
-                    <p>The conch, beautiful and majestic. Perfect
+                    <p>The Conch. Beautiful and majestic. Perfect
                         for get togethers, parties, or other small
                         gatherings. 
                     </p>
@@ -34,7 +35,7 @@
                 </li>
                 <li>
                     <a><img src="./img/shell02.jpg"></a>
-                    <p>The broken heart. This makes a great gift to
+                    <p>The Broken Heart. This makes a great gift to
                         those who have wronged you. 
                     </p>
                     <span>$5.99</span> <button>Add to Cart</button> 
@@ -42,14 +43,14 @@
                 <li>
                     <a><img src="./img/shell03.jpg"></a>
                     <p>Ocean's Wail. This is a great seashell to have on
-                        your coffee table to impress your guests. Very
+                        your coffee table to impress your guests. A very
                         popular pick.
                     </p>
                     <span>$19.99</span> <button>Add to Cart</button> 
                 </li>
                 <li>
                     <a><img src="./img/shell04.jpg"></a>
-                    <p>The tiny titan. This little black swirl will keep
+                    <p>The Tiny Titan. This little black swirl will keep
                         you company in your pocket during important moments
                         in your life. Never be without it.
                     </p>
@@ -72,6 +73,16 @@
                     <span>$24.99</span> <button>Add to Cart</button> 
                 </li>
             </ul>
+        </div>
+        <div id="logInContainer">
+            <h1>Sign In</h1>
+            <form action="#" method="#">
+                <input type="text" name="userId" id="userId" placeholder="User Id">
+                <input type="password" name="password" id="password" placeholder="Password"><br>
+                <submit><button>Submit</button></submit><br><br>
+                <a href="#">Don't have an account? Sign up today!</a><br><br>
+                <span id="logInContainerClose">Close</span>
+            </form>
         </div>
     </div>
 </body>
