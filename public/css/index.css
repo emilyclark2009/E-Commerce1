@@ -11,6 +11,10 @@
     width: 960px;
 }
 
+a{
+    text-decoration: none;
+}
+
 #titleBar{
     background: linear-gradient(0.25turn, rgb(0, 0, 255), rgb(217, 214, 248));
     padding: 5%;
