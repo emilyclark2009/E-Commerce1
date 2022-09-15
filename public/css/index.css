@@ -11,6 +11,10 @@
     width: 960px;
 }
 
+div#titleBar h4{
+    float: right;
+}
+
 a{
     text-decoration: none;
 }
