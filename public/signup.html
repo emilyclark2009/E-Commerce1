@@ -28,8 +28,11 @@
                     character
                 </p>
                 <form>
-                    <input type="email" name="newUserName" id="newUserName" placeholder="Enter Email">
-                    <input type="password" name="newPassword" id="newPassword" placeholder="Create New Password"><br>
+                    <input type="email" name="newUserName" id="newUserName" placeholder="Enter Email" required>
+                    <input type="password" name="newPassword" id="newPassword" pattern="^(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$" placeholder="Create New Password" required>
+                    <input type="text" name="newFirstName" id="newFirstName" placeholder="First Name" required>
+                    <input type="text" name="newLastName" id="newLastName" placeholder="Last Name" required>
+                    <br>
                     <submit><button>Submit</button></submit>
                     <div><a href="./index.html">Return Home</a></div>
                 </form>
