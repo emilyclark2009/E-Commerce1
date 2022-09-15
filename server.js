@@ -12,6 +12,9 @@ app.get("/", (req, res, next) =>{
 	res.render("index");
 });
 
+const signUpRouter = require("./routers/sign-up-router.js");
+app.use("/signUp", signUpRouter);
+
 const PORT = process.env.PORT || 4001;
 
 app.listen(PORT, () =>{

@@ -27,7 +27,7 @@
                     one uppercase, at least one number, and one special
                     character
                 </p>
-                <form>
+                <form action="/signUp" method="POST">
                     <input type="email" name="newUserName" id="newUserName" placeholder="Enter Email" required>
                     <input type="password" name="newPassword" id="newPassword" pattern="^(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$" placeholder="Create New Password" required>
                     <input type="text" name="newFirstName" id="newFirstName" placeholder="First Name" required>
