@@ -12,3 +12,5 @@ signUpRouter.post("/", (req,res)=>{
         }
     })
 })
+
+module.exports = signUpRouter;

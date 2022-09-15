@@ -1,3 +1,4 @@
+/*
 const {Pool} = require('pg')
 
 
@@ -6,9 +7,10 @@ const pool = new Pool({
     user: '',
     password: '',
     host: '',
-    port: , 
+    port: '', 
     database: ''
 })
 
 
 module.exports = {pool}
+*/

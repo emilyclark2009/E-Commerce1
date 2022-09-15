@@ -15,6 +15,9 @@ app.get("/", (req, res, next) =>{
 const signUpRouter = require("./routers/sign-up-router.js");
 app.use("/signUp", signUpRouter);
 
+const cartRouter = require("./routers/cartRouter.js");
+app.use("/cart", cartRouter);
+
 const PORT = process.env.PORT || 4001;
 
 app.listen(PORT, () =>{
