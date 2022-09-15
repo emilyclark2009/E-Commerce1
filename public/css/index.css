@@ -48,6 +48,10 @@ nav ul li:hover{
     height: 32px;
 }
 
+#helloUser{
+    margin-left: 2%;
+}
+
 .productList{
     padding: 10%;
     display: flex;

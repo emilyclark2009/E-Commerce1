@@ -13,3 +13,7 @@ logIn.addEventListener("click", ()=>{
 logInContainerClose.addEventListener("click", ()=>{
     document.getElementById("logInContainer").style.top = "-100vh";
 })
+
+//Add To Cart Functionality
+//This code will change the text within the "Add to Cart" button to
+//"Added!" when the user clicks on it
