@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const { pool } = require('./db.js')
+const pageRouter = require("./routers/pageRouter.js");
 const cartRouter = require("./routers/cartRouter.js");
 const signUpRouter = require("./routers/sign-up-router.js");
 
@@ -12,15 +13,19 @@ app.use(express.urlencoded({ extended: false }));
 
 app.use(express.json());
 
+app.get("/", (req, res, next) => {
+    res.render("index.ejs");
+});
+
 app.set("view engine", "ejs");
+
+app.use("/pageRouter", pageRouter);
 
 app.use("/signUp", signUpRouter);
 
 app.use("/cart", cartRouter);
 
 
-app.get("/", (req, res, next) => {
-    res.render("index.ejs");
     /*
     pool.query("SELECT * FROM customers;", (err, results)=>{
         if (err){
@@ -30,34 +35,6 @@ app.get("/", (req, res, next) => {
     console.log('all good')
         console.log(results.rows)
     }) */
-});
-
-
-// possibly sperate these routes into a seperate router?
-
-app.get("/signup", (req, res) => {
-    res.render('signup.ejs')
-})
-
-app.get("/index", (req, res) => {
-    res.render('index.ejs')
-})
-
-app.get("/cart", (req, res) => {
-    res.render('cart.ejs')
-})
-
-app.get("/checkout", (req, res) => {
-    res.render('checkout.ejs')
-})
-
-app.get("/account", (req, res) => {
-    res.render('account.ejs')
-})
-
-
-//
-
 
 
 const PORT = process.env.PORT || 4001;
