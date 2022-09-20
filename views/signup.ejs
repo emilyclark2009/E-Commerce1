@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sign Up Page</title>
-    <link href="./css/signup.css" type="text/css" rel="stylesheet">
+    <link href="/css/signup.css" type="text/css" rel="stylesheet">
 </head>
 <body>
     <div id="wrapper">
@@ -27,7 +27,13 @@
                     one uppercase, at least one number, and one special
                     character
                 </p>
-
+<ul>
+    <% if (typeof errors != 'undefined') {%>
+       <% errors.forEach(error=>{ %>
+            <li> <%= error.message %> </li>
+       <% }) %>
+    <% } %>
+</ul>
                 <form action="/signUp" method="POST">
                     <input type="email" name="newUserName" id="newUserName" placeholder="Enter Email" required>
                     <input type="password" name="newPassword" id="newPassword" pattern="^(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$" placeholder="Create New Password" required>
@@ -35,8 +41,8 @@
                     <input type="text" name="newLastName" id="newLastName" placeholder="Last Name" required>
                     <br>
 
-                    <submit><button>Submit</button></submit>
-                    <div><a href="./index.html">Return Home</a></div>
+                    <input type="submit">
+                    <div><a href="./index">Return Home</a></div>
                 </form>
             </div>
         </div>
