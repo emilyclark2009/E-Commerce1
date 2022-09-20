@@ -27,13 +27,13 @@
                     one uppercase, at least one number, and one special
                     character
                 </p>
-<ul>
-    <% if (typeof errors != 'undefined') {%>
-       <% errors.forEach(error=>{ %>
-            <li> <%= error.message %> </li>
-       <% }) %>
-    <% } %>
-</ul>
+            <ul>
+                <% if (typeof errors != 'undefined') {%>
+                    <% errors.forEach(error=>{ %>
+                <li><%= error.message %></li>
+                    <% }) %>
+                    <% } %>
+            </ul>
                 <form action="/signUp" method="POST">
                     <input type="email" name="newUserName" id="newUserName" placeholder="Enter Email" required>
                     <input type="password" name="newPassword" id="newPassword" pattern="^(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$" placeholder="Create New Password" required>
