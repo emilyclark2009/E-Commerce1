@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shopping Cart</title>
     <link href="/css/cart.css" type="text/css" rel="stylesheet">
+    <script src="/js/cart.js" type="text/javascript" defer></script>
 </head>
 <body>
     <div id="wrapper">
@@ -15,16 +16,16 @@
             <div id="navContainer">
                 <nav>
                     <ul>
-                        <li><a href="./index">Home</a></li>
-                        <li><a href="./checkout" >Checkout</a></li>
-                        <li><a href="./account">Account</a></li>
+                        <li><a href="/pageRouter/index">Home</a></li>
+                        <li><a href="/pageRouter/checkout" >Checkout</a></li>
+                        <li><a href="/pageRouter/account">Account</a></li>
                     </ul>
                 </nav>
             </div>
         </div>
         <h3 id="userCart">User's Shopping Cart</h3>
         <div class="shoppingCart">
-            <h3>You have no items in your shopping cart</h3>
+            <h3 id="emptyCart">You have no items in your shopping cart</h3>
         </div>
     </div>
 </body>

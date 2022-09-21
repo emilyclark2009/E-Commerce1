@@ -11,7 +11,7 @@ const shoppingCart = {
 }
 
 cartRouter.get("/", (req, res, next) =>{
-   res.send(shoppingCart); 
+   res.send({shoppingCart: shoppingCart}); 
 });
 
 cartRouter.post("/", (req, res, next) =>{

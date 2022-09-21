@@ -33,7 +33,7 @@ a{
 .column1{
     flex-basis: 50%;
     flex-grow: 1;
-    background-image: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), url(/public/img/shellbackground.jpg);
+    background-image: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), url(/img/shellbackground.jpg);
     background-size: cover;
     background-position: center;
     min-height: inherit;
@@ -70,7 +70,7 @@ a{
     padding: 5%;
 }
 
-.column2 form button{
+#submit{
     margin: 5%;
     padding: 5%;
     background:rgb(0, 0, 255);
@@ -80,7 +80,7 @@ a{
     transition: 0.5s;
 }
 
-.column2 form button:hover{
+#submit:hover{
     background: yellow;
     color: black;
 }
@@ -95,4 +95,14 @@ a{
 .column2 a:hover{
     background: yellow;
     border-radius: 20px;
+}
+
+.column2 ul{
+    list-style: none;
+}
+
+.column2 ul li{
+    color: red;
+    font-weight: bold;
+    margin: 5%;
 }
