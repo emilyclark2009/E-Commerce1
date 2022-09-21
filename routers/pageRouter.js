@@ -21,4 +21,8 @@ pageRouter.get("/account", (req, res) => {
     res.render('account.ejs')
 });
 
+pageRouter.get("/signUpConfirm", (req, res) =>{
+    res.render('signUpConfirm.ejs')
+});
+
 module.exports = pageRouter;

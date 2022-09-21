@@ -16,6 +16,25 @@ logInContainerClose.addEventListener("click", ()=>{
     document.getElementById("logInContainer").style.top = "-100vh";
 })
 
+//Hello User Functionality
+const updateGreeting = () =>{
+    fetch("/signUpLogIn", { method: "GET"})
+    .then(response =>{
+        if(response.ok) return response.json();
+    
+        renderError(response);
+    })
+    .then(response =>{
+        const loggedIn = response.loggedIn;
+        const customerInfo = response.customerInfo;
+        if(loggedIn){
+            document.getElementById("helloUser").innerHTML = `Welcome ${customerInfo.first_name}!`;
+        }
+    })
+}
+
+updateGreeting();
+
 
 //Add To Cart Functionality
 //This code will change the text within the "Add to Cart" button to
@@ -95,3 +114,4 @@ logInSubmit.addEventListener("click", ()=> {
     
 
 })
+

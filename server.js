@@ -3,7 +3,7 @@ const app = express();
 const { pool } = require('./db.js')
 const pageRouter = require("./routers/pageRouter.js");
 const cartRouter = require("./routers/cartRouter.js");
-const signUpRouter = require("./routers/sign-up-router.js");
+const signUpLogInRouter = require("./routers/signUpLogInRouter.js");
 
 app.use(express.static("public"));
 
@@ -21,7 +21,7 @@ app.set("view engine", "ejs");
 
 app.use("/pageRouter", pageRouter);
 
-app.use("/signUp", signUpRouter);
+app.use("/signUpLogIn", signUpLogInRouter);
 
 app.use("/cart", cartRouter);
 
