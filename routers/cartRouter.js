@@ -1,4 +1,7 @@
+const { query } = require("express");
 const express = require("express");
+const {pool} = require('../db.js');
+
 const cartRouter = express.Router();
 
 const shoppingCart = {
@@ -9,6 +12,8 @@ const shoppingCart = {
     "sailorsBounty": 0,
     "whitePrincess": 0
 }
+
+
 
 cartRouter.get("/", (req, res, next) =>{
    res.send({shoppingCart: shoppingCart}); 

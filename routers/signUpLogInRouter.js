@@ -1,6 +1,5 @@
-const express = require('express')
-const app = express()
-const {pool} = require('../db.js')
+const express = require('express');
+const {pool} = require('../db.js');
 
 const signUpLogInRouter = express.Router()
 
@@ -49,6 +48,21 @@ signUpLogInRouter.get('/', (req, res, next) =>{
     res.send(login);
 });
 
-
+signUpLogInRouter.get('/logIn', (req, res, next) =>{
+    pool.query('SELECT * FROM customers WHERE email = $1', [req.query.email], (err, results) =>{
+        let errors = [];
+        login.customerInfo = results.rows[0];
+        if(login.customerInfo.email != req.query.email) errors.push({message: "Invalid Email"});
+        if(login.customerInfo.password === req.query.password){
+            login.loggedIn = true;
+            res.render('index.ejs');
+        }else{
+            errors.push({message: "Invalid Password"});
+        }
+        if (errors.length > 0) {
+            res.send({errors});
+        }
+    })
+});
 
 module.exports = signUpLogInRouter;

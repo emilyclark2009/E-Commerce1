@@ -79,12 +79,19 @@
         </div>
         <div id="logInContainer">
             <h1>Sign In</h1>
-            <form action="#" method="#">
+            <form action="/signUpLogIn/logIn" method="GET">
                 <input type="email" name="email" id="email" placeholder="Email">
                 <input type="password" name="password" id="password" placeholder="Password"><br>
-                <submit><button id="submit">Submit</button></submit><br><br>
+                <input id="submit" type="submit"><br>
                 <a href="/pageRouter/signup">Don't have an account? Sign up today!</a><br><br>
                 <span id="logInContainerClose">Close</span>
+                <ul>
+                    <% if (typeof errors != 'undefined') {%>
+                        <% errors.forEach(error=>{ %>
+                    <li><%= error.message %></li>
+                        <% }) %>
+                        <% } %>
+                </ul>
             </form>
         </div>
     </div>
