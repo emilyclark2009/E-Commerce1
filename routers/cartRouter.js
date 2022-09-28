@@ -1,4 +1,3 @@
-const { query } = require("express");
 const express = require("express");
 const {pool} = require('../db.js');
 
@@ -23,19 +22,24 @@ cartRouter.post("/", (req, res, next) =>{
     const shell = req.query.shell;
     switch(shell){
         case "conch": shoppingCart["conch"] += 1;
+        pool.query('UPDATE cart SET conch = conch + 1 WHERE id = $1', [req.query.id]); 
         break;
         case "brokenHeart": shoppingCart["brokenHeart"] += 1;
+        pool.query('UPDATE cart SET brokenheart = brokenheart + 1 WHERE id = $1', [req.query.id]);
         break;
         case "oceansWail": shoppingCart["oceansWail"] += 1;
+        pool.query('UPDATE cart SET oceanswail = oceanswail + 1 WHERE id = $1', [req.query.id]); 
         break;
         case "tinyTitan": shoppingCart["tinyTitan"] += 1;
+        pool.query('UPDATE cart SET tinytitan = tinytitan + 1 WHERE id = $1', [req.query.id]); 
         break;
         case "sailorsBounty": shoppingCart["sailorsBounty"] += 1;
+        pool.query('UPDATE cart SET sailorsbounty = sailorsbounty + 1 WHERE id = $1', [req.query.id]); 
         break;
         case "whitePrincess": shoppingCart["whitePrincess"] += 1;
+        pool.query('UPDATE cart SET whiteprincess = whiteprincess + 1 WHERE id = $1', [req.query.id]); 
         break;
     }
-    //We can replace console.log with a pool database shopping cart update when ready
     console.log(shoppingCart);
 });
 

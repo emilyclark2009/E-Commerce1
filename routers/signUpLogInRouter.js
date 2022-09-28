@@ -38,6 +38,7 @@ signUpLogInRouter.post("/", (req,res)=>{
             pool.query('SELECT * FROM customers WHERE email = $1', [req.body.newUserName], (err, results)=>{  
                 login.customerInfo = results.rows[0];
                 login.loggedIn = true;
+                pool.query('INSERT INTO cart (id, conch, brokenheart, oceanswail, tinytitan, sailorsbounty, whiteprincess) VALUES($1,$2,$3,$4,$5,$6,$7)', [login.customerInfo.id, 0, 0, 0, 0, 0, 0]);
                 res.render('signUpConfirm.ejs');
             })
         }

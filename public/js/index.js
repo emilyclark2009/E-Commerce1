@@ -54,7 +54,7 @@ const addConch = document.getElementById("conch");
 addConch.addEventListener("click", () =>{
     if(loggedIn === true){
         document.getElementById("conch").innerHTML = "Added!";
-        fetch('/cart?shell=conch', {method: "POST"});
+        fetch(`/cart?id=${customerInfo.id}&shell=conch`, {method: "POST"});
         setTimeout(function(){
             document.getElementById("conch").innerHTML = "Add to Cart";
         }, 1000);
@@ -72,7 +72,7 @@ const addBrokenHeart = document.getElementById("brokenHeart");
 addBrokenHeart.addEventListener("click", () =>{
     if(loggedIn === true){
         document.getElementById("brokenHeart").innerHTML = "Added!";
-        fetch('/cart?shell=brokenHeart', {method: "POST"});
+        fetch(`/cart?id=${customerInfo.id}&shell=brokenHeart`, {method: "POST"});
         setTimeout(function(){
             document.getElementById("brokenHeart").innerHTML = "Add to Cart";
         }, 1000);
@@ -90,7 +90,7 @@ const addOceansWail = document.getElementById("oceansWail");
 addOceansWail.addEventListener("click", () =>{
     if(loggedIn === true){
         document.getElementById("oceansWail").innerHTML = "Added!";
-        fetch('/cart?shell=oceansWail', {method: "POST"});
+        fetch(`/cart?id=${customerInfo.id}&shell=oceansWail`, {method: "POST"});
         setTimeout(function(){
             document.getElementById("oceansWail").innerHTML = "Add to Cart";
         }, 1000);
@@ -108,7 +108,7 @@ const addTinyTitan = document.getElementById("tinyTitan");
 addTinyTitan.addEventListener("click", () =>{
     if(loggedIn === true){
         document.getElementById("tinyTitan").innerHTML = "Added!";
-        fetch('/cart?shell=tinyTitan', {method: "POST"});
+        fetch(`/cart?id=${customerInfo.id}&shell=tinyTitan`, {method: "POST"});
         setTimeout(function(){
             document.getElementById("tinyTitan").innerHTML = "Add to Cart";
         }, 1000);
@@ -126,7 +126,7 @@ const addSailorsBounty = document.getElementById("sailorsBounty");
 addSailorsBounty.addEventListener("click", () =>{
     if(loggedIn == true){
         document.getElementById("sailorsBounty").innerHTML = "Added!";
-        fetch('/cart?shell=sailorsBounty', {method: "POST"});
+        fetch(`/cart?id=${customerInfo.id}&shell=sailorsBounty`, {method: "POST"});
         setTimeout(function(){
             document.getElementById("sailorsBounty").innerHTML = "Add to Cart";
         }, 1000);
@@ -144,7 +144,7 @@ const addWhitePrincess = document.getElementById("whitePrincess");
 addWhitePrincess.addEventListener("click", () =>{
     if(loggedIn === true){
         document.getElementById("whitePrincess").innerHTML = "Added!";
-        fetch('/cart?shell=whitePrincess', {method: "POST"});
+        fetch(`/cart?id=${customerInfo.id}&shell=whitePrincess`, {method: "POST"});
         setTimeout(function(){
             document.getElementById("whitePrincess").innerHTML = "Add to Cart";
         }, 1000);
