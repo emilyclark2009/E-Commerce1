@@ -15,7 +15,14 @@ const shoppingCart = {
 
 
 cartRouter.get("/", (req, res, next) =>{
-   res.send({shoppingCart: shoppingCart}); 
+   pool.query('SELECT * FROM cart', (err, results) =>{
+    if(err){
+        console.log(err);
+    }else{
+        const cartInfo = results.rows[0];
+        res.send(cartInfo);
+    }
+   });
 });
 
 cartRouter.post("/", (req, res, next) =>{

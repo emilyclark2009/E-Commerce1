@@ -63,7 +63,7 @@ signUpLogInRouter.get('/logIn', (req, res, next) =>{
         if (errors.length > 0) {
             res.send({errors});
         }
-    })
+    });
 });
 
 module.exports = signUpLogInRouter;

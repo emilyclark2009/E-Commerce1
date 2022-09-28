@@ -1,25 +1,7 @@
-//Log In Box Functionality
-//Clicking on "Log In" will execute the following code. This code allows
-//for the log in box to appear for a user to type in their username
-//and password
-
-const logIn = document.getElementById("logIn");
-const logInContainerClose = document.getElementById("logInContainerClose");
-const logInSubmit = document.getElementById("submit");
-const welcomeContainer = document.getElementById("welcome");
-
-
-logIn.addEventListener("click", ()=>{
-    document.getElementById("logInContainer").style.top = "17%";
-})
-
-logInContainerClose.addEventListener("click", ()=>{
-    document.getElementById("logInContainer").style.top = "-100vh";
-})
-
+//Update Log In Status Functionality
 //Updates Welcome message to include users name. Also tells the page that
-//the user is logged in, creating a shopping cart and allowing for the 
-//user to add items to their shopping cart
+//the user is logged in as well as allows the page to access customer
+//information
 let loggedIn = false;
 let customerInfo = null;
 
@@ -41,6 +23,41 @@ const updateGreeting = () =>{
 }
 
 updateGreeting();
+
+//Log In Box Functionality
+//Clicking on "Log In" will execute the following code. This code allows
+//for the log in box to appear for a user to type in their username
+//and password
+
+const logIn = document.getElementById("logIn");
+const logInContainerClose = document.getElementById("logInContainerClose");
+const logInSubmit = document.getElementById("submit");
+const welcomeContainer = document.getElementById("welcome");
+
+
+logIn.addEventListener("click", ()=>{
+    document.getElementById("logInContainer").style.top = "17%";
+})
+
+logInContainerClose.addEventListener("click", ()=>{
+    document.getElementById("logInContainer").style.top = "-100vh";
+})
+
+//Shopping Cart Link Functionality
+//Checks if user is logged in before redirecting to shopping cart page
+const shoppingCart = document.getElementById("shoppingCart");
+
+shoppingCart.addEventListener("click", () =>{
+    if(loggedIn === false){
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+        logIn.click();
+    }else{
+        window.location.href = "/pageRouter/cart";
+    }
+});
 
 
 //Add To Cart Functionality
@@ -156,10 +173,3 @@ addWhitePrincess.addEventListener("click", () =>{
         logIn.click();
     }
 });
-
-logInSubmit.addEventListener("click", ()=> {
-    const email = document.getElementById("email").value;
-    welcomeContainer.innerHTML += "Welcome " + email;
-    document.getElementById("logInContainer").style.top = "-100vh";
-})
-
