@@ -63,4 +63,32 @@ cartRouter.delete("/", (req, res, next) =>{
     }
 });
 
+cartRouter.put("/", (req, res, next) =>{
+    const shell = req.query.shell; 
+    switch(shell){
+        case "conch":
+            pool.query('UPDATE cart SET conch = $1 WHERE id = $2', [req.query.quantity, req.query.id]);
+            break;
+        case "brokenHeart":
+            pool.query('UPDATE cart SET brokenheart = $1 WHERE id = $2', [req.query.quantity, req.query.id]);
+            break;
+        case "oceansWail":
+            pool.query('UPDATE cart SET oceanswail = $1 WHERE id = $2', [req.query.quantity, req.query.id]);
+            break;
+        case "tinyTitan":
+            pool.query('UPDATE cart SET tinytitan = $1 WHERE id = $2', [req.query.quantity, req.query.id]);
+            break;
+        case "sailorsBounty":
+            pool.query('UPDATE cart SET sailorsbounty = $1 WHERE id = $2', [req.query.quantity, req.query.id]);
+            break;
+        case "whitePrincess":
+            pool.query('UPDATE cart SET whiteprincess = $1 WHERE id = $2', [req.query.quantity, req.query.id]);
+            break;
+    }
+});
+
+
+
+
+
 module.exports = cartRouter;

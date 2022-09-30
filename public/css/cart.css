@@ -75,11 +75,13 @@ th{
 
 td{
     padding: 1%;
+    
 }
 
 input{
     text-align: right;
     width: 75px;
+    margin: 5%;
 }
 
 img{
