@@ -3,17 +3,6 @@ const {pool} = require('../db.js');
 
 const cartRouter = express.Router();
 
-const shoppingCart = {
-    "conch": 0,
-    "brokenHeart": 0,
-    "oceansWail": 0,
-    "tinyTitan": 0,
-    "sailorsBounty": 0,
-    "whitePrincess": 0
-}
-
-
-
 cartRouter.get("/", (req, res, next) =>{
    pool.query('SELECT * FROM cart', (err, results) =>{
     if(err){
@@ -28,26 +17,50 @@ cartRouter.get("/", (req, res, next) =>{
 cartRouter.post("/", (req, res, next) =>{
     const shell = req.query.shell;
     switch(shell){
-        case "conch": shoppingCart["conch"] += 1;
-        pool.query('UPDATE cart SET conch = conch + 1 WHERE id = $1', [req.query.id]); 
-        break;
-        case "brokenHeart": shoppingCart["brokenHeart"] += 1;
-        pool.query('UPDATE cart SET brokenheart = brokenheart + 1 WHERE id = $1', [req.query.id]);
-        break;
-        case "oceansWail": shoppingCart["oceansWail"] += 1;
-        pool.query('UPDATE cart SET oceanswail = oceanswail + 1 WHERE id = $1', [req.query.id]); 
-        break;
-        case "tinyTitan": shoppingCart["tinyTitan"] += 1;
-        pool.query('UPDATE cart SET tinytitan = tinytitan + 1 WHERE id = $1', [req.query.id]); 
-        break;
-        case "sailorsBounty": shoppingCart["sailorsBounty"] += 1;
-        pool.query('UPDATE cart SET sailorsbounty = sailorsbounty + 1 WHERE id = $1', [req.query.id]); 
-        break;
-        case "whitePrincess": shoppingCart["whitePrincess"] += 1;
-        pool.query('UPDATE cart SET whiteprincess = whiteprincess + 1 WHERE id = $1', [req.query.id]); 
-        break;
+        case "conch":
+            pool.query('UPDATE cart SET conch = conch + 1 WHERE id = $1', [req.query.id]); 
+            break;
+        case "brokenHeart":
+            pool.query('UPDATE cart SET brokenheart = brokenheart + 1 WHERE id = $1', [req.query.id]);
+            break;
+        case "oceansWail":
+            pool.query('UPDATE cart SET oceanswail = oceanswail + 1 WHERE id = $1', [req.query.id]); 
+            break;
+        case "tinyTitan":
+            pool.query('UPDATE cart SET tinytitan = tinytitan + 1 WHERE id = $1', [req.query.id]); 
+            break;
+        case "sailorsBounty":
+            pool.query('UPDATE cart SET sailorsbounty = sailorsbounty + 1 WHERE id = $1', [req.query.id]); 
+            break;
+        case "whitePrincess":
+            pool.query('UPDATE cart SET whiteprincess = whiteprincess + 1 WHERE id = $1', [req.query.id]); 
+            break;
     }
     console.log(shoppingCart);
+});
+
+cartRouter.delete("/", (req, res, next) =>{
+    const shell = req.query.shell;
+    switch(shell){
+        case "conch":
+            pool.query('UPDATE cart SET conch = 0 WHERE id = $1', [req.query.id]);
+            break;
+        case "brokenHeart":
+            pool.query('UPDATE cart SET brokenheart = 0 WHERE id = $1', [req.query.id]);
+            break;
+        case "oceansWail":
+            pool.query('UPDATE cart SET oceanswail = 0 WHERE id = $1', [req.query.id]);
+            break;
+        case "tinyTitan":
+            pool.query('UPDATE cart SET tinytitan = 0 WHERE id = $1', [req.query.id]);
+            break;
+        case "sailorsBounty":
+            pool.query('UPDATE cart SET sailorsbounty = 0 WHERE id = $1', [req.query.id]);
+            break;
+        case "whitePrincess":
+            pool.query('UPDATE cart SET whiteprincess = 0 WHERE id = $1', [req.query.id]);
+            break;
+    }
 });
 
 module.exports = cartRouter;

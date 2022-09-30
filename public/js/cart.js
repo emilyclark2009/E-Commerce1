@@ -1,18 +1,250 @@
-//Check For Empty Shopping Cart Functionality
-//Checks to see if there's items in your cart to display dynamic message
-const shoppingCartCheck = cart =>{
-    if(cart["conch"] === 0 && cart["brokenheart"] === 0 && cart["oceanswail"] === 0 && cart["tinytitan"] === 0 && cart["sailorsbounty"] === 0 && cart["whiteprincess"] === 0) return false;
-    return true;
-}
-
 //Populate Shopping Cart Functionality
 //Builds the page to view your shopping cart items
 
-const populateShoppingCart = cartStatus =>{
-    if(cartStatus){
-        document.getElementById("cartItems").innerHTML = "There's stuff in your cart."
-    }else{
-        document.getElementById("cartItems").innerHTML = "You have no items in your shopping cart.";
+const populateShoppingCart = cart =>{
+    delete cart.id;
+
+    let cartCount = 0;
+    let cartValues = Object.values(cart);
+    cartValues.forEach(element =>{
+        if(element != 0) cartCount += 1;
+    });
+
+    if(cartCount === 0){
+        let newElement = document.createElement("tr");
+        newElement.setAttribute("id", "currentRow");
+        let currentElement = document.getElementById("cartTable");
+        currentElement.appendChild(newElement);
+
+        let newContent = document.createTextNode("You're cart is empty");
+        currentElement.appendChild(newContent);
+    }
+
+    for(let [key, value] of Object.entries(cart)){
+        if(value === 0){
+            continue;
+        }else{
+            let newElement = document.createElement("tr");
+            newElement.setAttribute("id", "currentRow");
+            let currentElement = document.getElementById("cartTable");
+            currentElement.appendChild(newElement);
+
+            let newContent = document.createElement("img");
+            currentElement = document.getElementById("currentRow");
+
+            switch(key){
+                case "conch": 
+                newElement = document.createElement("td");
+                newContent.setAttribute("src", "/img/shell01.jpg");
+                newElement.appendChild(newContent);
+                currentElement.appendChild(newElement);
+
+                newContent = document.createTextNode(" " + "The Conch");
+                newElement.appendChild(newContent);
+                currentElement.appendChild(newElement);
+
+                newElement = document.createElement("td");
+                newContent = document.createTextNode("$10.99");
+                newElement.appendChild(newContent);
+                currentElement.appendChild(newElement);
+
+                newElement = document.createElement("td");
+                newContent = document.createElement("input");
+                newContent.type = "number";
+                newContent.setAttribute("value", value);
+                newElement.appendChild(newContent);
+                currentElement.appendChild(newElement);
+    
+                newElement = document.createElement("td");
+                newContent = document.createElement("button");
+                newContent.setAttribute("id", "deleteConch");
+                newContent.innerHTML = "Delete";
+                newElement.appendChild(newContent);
+                currentElement.appendChild(newElement);
+
+                document.getElementById("deleteConch").addEventListener("click", () =>{
+                    fetch(`/cart?id=${customerInfo.id}&shell=conch`, {method: "DELETE"});
+                    document.location.reload(true);
+                });
+                break;
+
+                case "brokenheart": 
+                newElement = document.createElement("td");
+                newContent.setAttribute("src", "/img/shell02.jpg");
+                newElement.appendChild(newContent);
+                currentElement.appendChild(newElement);
+
+                newContent = document.createTextNode(" " + "The Broken Heart");
+                newElement.appendChild(newContent);
+                currentElement.appendChild(newElement);
+
+                newElement = document.createElement("td");
+                newContent = document.createTextNode("$5.99");
+                newElement.appendChild(newContent);
+                currentElement.appendChild(newElement);
+
+                newElement = document.createElement("td");
+                newContent = document.createElement("input");
+                newContent.type = "number";
+                newContent.setAttribute("value", value);
+                newElement.appendChild(newContent);
+                currentElement.appendChild(newElement);
+    
+                newElement = document.createElement("td");
+                newContent = document.createElement("button");
+                newContent.setAttribute("id", "deleteBrokenHeart");
+                newContent.innerHTML = "Delete";
+                newElement.appendChild(newContent);
+                currentElement.appendChild(newElement);
+
+                document.getElementById("deleteBrokenHeart").addEventListener("click", () =>{
+                    fetch(`/cart?id=${customerInfo.id}&shell=brokenHeart`, {method: "DELETE"});
+                    document.location.reload(true);
+                });
+                break;
+
+                case "oceanswail": 
+                newElement = document.createElement("td");
+                newContent.setAttribute("src", "/img/shell03.jpg");
+                newElement.appendChild(newContent);
+                currentElement.appendChild(newElement);
+
+                newContent = document.createTextNode(" " + "Ocean's Wail");
+                newElement.appendChild(newContent);
+                currentElement.appendChild(newElement);
+
+                newElement = document.createElement("td");
+                newContent = document.createTextNode("$19.99");
+                newElement.appendChild(newContent);
+                currentElement.appendChild(newElement);
+
+                newElement = document.createElement("td");
+                newContent = document.createElement("input");
+                newContent.type = "number";
+                newContent.setAttribute("value", value);
+                newElement.appendChild(newContent);
+                currentElement.appendChild(newElement);
+    
+                newElement = document.createElement("td");
+                newContent = document.createElement("button");
+                newContent.setAttribute("id", "deleteOceansWail");
+                newContent.innerHTML = "Delete";
+                newElement.appendChild(newContent);
+                currentElement.appendChild(newElement);
+
+                document.getElementById("deleteOceansWail").addEventListener("click", () =>{
+                    fetch(`/cart?id=${customerInfo.id}&shell=oceansWail`, {method: "DELETE"});
+                    document.location.reload(true);
+                });
+                break;
+
+                case "tinytitan": 
+                newElement = document.createElement("td");
+                newContent.setAttribute("src", "/img/shell04.jpg");
+                newElement.appendChild(newContent);
+                currentElement.appendChild(newElement);
+
+                newContent = document.createTextNode(" " + "The Tiny Titan");
+                newElement.appendChild(newContent);
+                currentElement.appendChild(newElement);
+
+                newElement = document.createElement("td");
+                newContent = document.createTextNode("$14.99");
+                newElement.appendChild(newContent);
+                currentElement.appendChild(newElement);
+
+                newElement = document.createElement("td");
+                newContent = document.createElement("input");
+                newContent.type = "number";
+                newContent.setAttribute("value", value);
+                newElement.appendChild(newContent);
+                currentElement.appendChild(newElement);
+    
+                newElement = document.createElement("td");
+                newContent = document.createElement("button");
+                newContent.setAttribute("id", "deleteTinyTitan");
+                newContent.innerHTML = "Delete";
+                newElement.appendChild(newContent);
+                currentElement.appendChild(newElement);
+
+                document.getElementById("deleteTinyTitan").addEventListener("click", () =>{
+                    fetch(`/cart?id=${customerInfo.id}&shell=tinyTitan`, {method: "DELETE"});
+                    document.location.reload(true);
+                });
+                break;
+
+                case "sailorsbounty": 
+                newElement = document.createElement("td");
+                newContent.setAttribute("src", "/img/shell05.jpg");
+                newElement.appendChild(newContent);
+                currentElement.appendChild(newElement);
+
+                newContent = document.createTextNode(" " + "Sailor's Bounty");
+                newElement.appendChild(newContent);
+                currentElement.appendChild(newElement);
+
+                newElement = document.createElement("td");
+                newContent = document.createTextNode("$19.99");
+                newElement.appendChild(newContent);
+                currentElement.appendChild(newElement);
+
+                newElement = document.createElement("td");
+                newContent = document.createElement("input");
+                newContent.type = "number";
+                newContent.setAttribute("value", value);
+                newElement.appendChild(newContent);
+                currentElement.appendChild(newElement);
+    
+                newElement = document.createElement("td");
+                newContent = document.createElement("button");
+                newContent.setAttribute("id", "deleteSailorsBounty");
+                newContent.innerHTML = "Delete";
+                newElement.appendChild(newContent);
+                currentElement.appendChild(newElement);
+
+                document.getElementById("deleteSailorsBounty").addEventListener("click", () =>{
+                    fetch(`/cart?id=${customerInfo.id}&shell=sailorsBounty`, {method: "DELETE"});
+                    document.location.reload(true);
+                });
+                break;
+
+                case "whiteprincess": 
+                newElement = document.createElement("td");
+                newContent.setAttribute("src", "/img/shell06.jpg");
+                newElement.appendChild(newContent);
+                currentElement.appendChild(newElement);
+
+                newContent = document.createTextNode(" " + "White Princess");
+                newElement.appendChild(newContent);
+                currentElement.appendChild(newElement);
+
+                newElement = document.createElement("td");
+                newContent = document.createTextNode("$24.99");
+                newElement.appendChild(newContent);
+                currentElement.appendChild(newElement);
+
+                newElement = document.createElement("td");
+                newContent = document.createElement("input");
+                newContent.type = "number";
+                newContent.setAttribute("value", value);
+                newElement.appendChild(newContent);
+                currentElement.appendChild(newElement);
+    
+                newElement = document.createElement("td");
+                newContent = document.createElement("button");
+                newContent.setAttribute("id", "deleteWhitePrincess");
+                newContent.innerHTML = "Delete";
+                newElement.appendChild(newContent);
+                currentElement.appendChild(newElement);
+
+                document.getElementById("deleteWhitePrincess").addEventListener("click", () =>{
+                    fetch(`/cart?id=${customerInfo.id}&shell=whitePrincess`, {method: "DELETE"});
+                    document.location.reload(true);
+                });
+                break;
+            }
+            document.getElementById("currentRow").setAttribute("id", "");
+        }
     }
 }
 
@@ -51,14 +283,11 @@ const fetchCustomerCart = () =>{
     .then(response =>{
         cart = response;
         console.log(cart);
-        const cartStatus = shoppingCartCheck(cart);
-        console.log(cartStatus);
-        populateShoppingCart(cartStatus);
-        
+        populateShoppingCart(cart);
+
     });
 }
 
 fetchCustomerCart();
 
-
-
+//Delete Items From Cart Functionality
