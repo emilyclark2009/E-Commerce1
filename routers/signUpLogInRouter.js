@@ -98,7 +98,11 @@ signUpLogInRouter.get('/', (req, res, next) =>{
 
 signUpLogInRouter.get('/logIn', passport.authenticate("local", {failureRedirect: "/"}), (req,res)=>{
     login.loggedIn = true;
-    res.render("dashboard.ejs", {user: req.user})
+    pool.query('SELECT * FROM customers WHERE email = $1', [req.query.email], (err, results) =>{
+        login.customerInfo = results.rows[0];
+    });
+    res.render("index.ejs", {user: req.user});
+    //res.render("dashboard.ejs", {user: req.user})
 } /*(req, res, next) =>{
     pool.query('SELECT * FROM customers WHERE email = $1', [req.query.email], (err, results) =>{
         let errors = [];
