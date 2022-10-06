@@ -86,11 +86,10 @@ const populateCheckout = cart =>{
     }
 }
 
-//Fetch Customer Info Functionality
-//Fetches customer information to be used on page
-let customerInfo = null;
-
-const fetchCustomerInfo = () =>{
+//Builds the checkout table
+const buildCheckout = () =>{
+    let customerInfo = null;
+    let cart = null;
     fetch("/signUpLogIn", { method: "GET"})
     .then(response =>{
         if(response.ok) return response.json();
@@ -99,22 +98,17 @@ const fetchCustomerInfo = () =>{
     })
     .then(response =>{
         customerInfo = response.customerInfo;
-    });
-}
+        fetch(`/cart?id=${customerInfo.id}`, { method: "GET"})
+        .then(response =>{
+            if(response.ok) return response.json();
 
-fetchCustomerInfo();
-
-const fetchCustomerCart = () =>{
-    fetch("/cart", { method: "GET"})
-    .then(response =>{
-        if(response.ok) return response.json();
-
-        renderError(response);
-    })
-    .then(response =>{
+            renderError(response);
+        })
+        .then(response =>{
         cart = response;
         populateCheckout(cart);
+        });
     });
 }
 
-fetchCustomerCart();
+buildCheckout();
