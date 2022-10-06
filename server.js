@@ -4,6 +4,18 @@ const { pool } = require('./db.js')
 const pageRouter = require("./routers/pageRouter.js");
 const cartRouter = require("./routers/cartRouter.js");
 const signUpLogInRouter = require("./routers/signUpLogInRouter.js");
+const passport = require("passport")
+const session = require("express-session")
+
+app.use(session({
+    secret:"test",
+    saveUninitialized: true,
+    cookie: {secure: false},
+    resave: false,
+}))
+
+app.use(passport.initialize())
+app.use(passport.session())
 
 app.use(express.static("public"));
 
