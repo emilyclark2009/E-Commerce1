@@ -4,7 +4,7 @@ const {pool} = require('../db.js');
 const cartRouter = express.Router();
 
 cartRouter.get("/", (req, res, next) =>{
-   pool.query('SELECT * FROM cart', (err, results) =>{
+   pool.query('SELECT * FROM cart WHERE id = $1', [req.query.id], (err, results) =>{
     if(err){
         console.log(err);
     }else{

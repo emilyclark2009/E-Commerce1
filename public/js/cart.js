@@ -1,9 +1,102 @@
+const shellPrices = {
+    "conch": 10.99,
+    "brokenHeart": 5.99,
+    "oceansWail": 19.99,
+    "tinyTitan": 14.99,
+    "sailorsBounty": 19.99,
+    "whitePrincess": 24.99
+}
+
+const buildShoppingCartList = (img, name, price, shellQuantityId, value, updateShellId, customerId, deleteShellId, sqlShell) =>{
+    //This code creates a new table row and appends it as a child
+    //to the exisiting html table
+    let newElement = document.createElement("tr");
+    newElement.setAttribute("id", "currentRow");
+    let currentElement = document.getElementById("cartTable");
+    currentElement.appendChild(newElement);
+
+    //This code creates two commonly used elements within the
+    //following switch code
+    let newContent = document.createElement("img");
+    currentElement = document.getElementById("currentRow");
+    
+    //This code creates a new data cell, attaches an img to the 
+    //data cell, and then attaches that data cell as a child 
+    //of the current row we're working on
+    newElement = document.createElement("td");
+    newContent.setAttribute("src", img);
+    newElement.appendChild(newContent);
+    currentElement.appendChild(newElement);
+
+    //This creates the text name
+    newContent = document.createTextNode(" " + name);
+    newElement.appendChild(newContent);
+    currentElement.appendChild(newElement);
+
+    //This creates the data cell and fills in the price
+    newElement = document.createElement("td");
+    newContent = document.createTextNode("$" + price);
+    newElement.appendChild(newContent);
+    currentElement.appendChild(newElement);
+
+    //This will create the data cell, create the input cell,
+    //and set the value of the input cell to the quantity of
+    //the product added form index.js
+    newElement = document.createElement("td");
+    newContent = document.createElement("input");
+    newContent.type = "number";
+    newContent.setAttribute("id", shellQuantityId);
+    newContent.setAttribute("value", value);
+    newContent.setAttribute("min", "0");
+    newElement.appendChild(newContent);
+    currentElement.appendChild(newElement);
+                
+    //This will create an update button for the user to update
+    //the quantity of the particular item in their shopping cart
+    newContent = document.createElement("button");
+    newContent.setAttribute("id", updateShellId);
+    newContent.innerHTML = "Update";
+    newElement.appendChild(newContent);
+
+    //This code creates the button functionality to send information
+    //to the router to update the shopping cart database
+    
+    document.getElementById(updateShellId).addEventListener("click", () =>{
+        let quantity = document.getElementById(shellQuantityId).value;
+        fetch(`/cart?id=${customerId}&shell=${sqlShell}&quantity=${quantity}`, {method: "PUT"});
+        document.location.reload(true);
+    });
+    
+
+    //This will create the button to delete the item from the user's
+    //shopping cart
+    newElement = document.createElement("td");
+    newContent = document.createElement("button");
+    newContent.setAttribute("id", deleteShellId);
+    newContent.innerHTML = "Delete";
+    newElement.appendChild(newContent);
+    currentElement.appendChild(newElement);
+
+    //This will create the functionality to update the shopping
+    //cart database to delete the particular item when the delete
+    //button is pressed
+    
+    document.getElementById(deleteShellId).addEventListener("click", () =>{
+        fetch(`/cart?id=${customerId}&shell=${sqlShell}`, {method: "DELETE"});
+        document.location.reload(true);
+    });
+
+    document.getElementById("currentRow").setAttribute("id", "");
+}
+
 //Populate Shopping Cart Functionality
 //Builds the page to view your shopping cart items
+
 
 const populateShoppingCart = cart =>{
     //This will delete the customer id number from cart data object to
     //help facilitate future functions. It's not needed at this point
+    const customerId = cart.id;
     delete cart.id;
 
     //This code is simply to disply an empty cart message if the cart
@@ -32,6 +125,7 @@ const populateShoppingCart = cart =>{
         if(value === 0){
             continue;
         }else{
+            
             //This code creates a new table row and appends it as a child
             //to the exisiting html table
             let newElement = document.createElement("tr");
@@ -44,9 +138,11 @@ const populateShoppingCart = cart =>{
             let newContent = document.createElement("img");
             currentElement = document.getElementById("currentRow");
 
+
             //Switch that checks which shell we need to build data cells for
+            
             switch(key){
-                case "conch": 
+                case "conch":
                 //This code creates a new data cell, attaches an img to the 
                 //data cell, and then attaches that data cell as a child 
                 //of the current row we're working on
@@ -74,6 +170,7 @@ const populateShoppingCart = cart =>{
                 newContent.type = "number";
                 newContent.setAttribute("id", "conchQuantity");
                 newContent.setAttribute("value", value);
+                newContent.setAttribute("min", "0");
                 newElement.appendChild(newContent);
                 currentElement.appendChild(newElement);
                 
@@ -88,7 +185,7 @@ const populateShoppingCart = cart =>{
                 //to the router to update the shopping cart database
                 document.getElementById("updateConch").addEventListener("click", () =>{
                     let conchQuantity = document.getElementById("conchQuantity").value;
-                    fetch(`/cart?id=${customerInfo.id}&shell=conch&quantity=${conchQuantity}`, {method: "PUT"});
+                    fetch(`/cart?id=${customerId}&shell=conch&quantity=${conchQuantity}`, {method: "PUT"});
                     document.location.reload(true);
                 });
     
@@ -105,13 +202,14 @@ const populateShoppingCart = cart =>{
                 //cart database to delete the particular item when the delete
                 //button is pressed
                 document.getElementById("deleteConch").addEventListener("click", () =>{
-                    fetch(`/cart?id=${customerInfo.id}&shell=conch`, {method: "DELETE"});
+                    fetch(`/cart?id=${customerId}&shell=conch`, {method: "DELETE"});
                     document.location.reload(true);
                 });
                 break;
+                
 
                 //Each additional case has identical code
-                case "brokenheart": 
+                case "brokenheart":
                 newElement = document.createElement("td");
                 newContent.setAttribute("src", "/img/shell02.jpg");
                 newElement.appendChild(newContent);
@@ -131,6 +229,7 @@ const populateShoppingCart = cart =>{
                 newContent.type = "number";
                 newContent.setAttribute("id", "brokenHeartQuantity");
                 newContent.setAttribute("value", value);
+                newContent.setAttribute("min", "0");
                 newElement.appendChild(newContent);
                 currentElement.appendChild(newElement);
 
@@ -141,7 +240,7 @@ const populateShoppingCart = cart =>{
 
                 document.getElementById("updateBrokenHeart").addEventListener("click", () =>{
                     let brokenHeartQuantity = document.getElementById("brokenHeartQuantity").value;
-                    fetch(`/cart?id=${customerInfo.id}&shell=brokenHeart&quantity=${brokenHeartQuantity}`, {method: "PUT"});
+                    fetch(`/cart?id=${customerId}&shell=brokenHeart&quantity=${brokenHeartQuantity}`, {method: "PUT"});
                     document.location.reload(true);
                 });
     
@@ -153,7 +252,7 @@ const populateShoppingCart = cart =>{
                 currentElement.appendChild(newElement);
 
                 document.getElementById("deleteBrokenHeart").addEventListener("click", () =>{
-                    fetch(`/cart?id=${customerInfo.id}&shell=brokenHeart`, {method: "DELETE"});
+                    fetch(`/cart?id=${customerId}&shell=brokenHeart`, {method: "DELETE"});
                     document.location.reload(true);
                 });
                 break;
@@ -178,6 +277,7 @@ const populateShoppingCart = cart =>{
                 newContent.type = "number";
                 newContent.setAttribute("id", "oceansWailQuantity")
                 newContent.setAttribute("value", value);
+                newContent.setAttribute("min", "0");
                 newElement.appendChild(newContent);
                 currentElement.appendChild(newElement);
 
@@ -188,7 +288,7 @@ const populateShoppingCart = cart =>{
 
                 document.getElementById("updateOceansWail").addEventListener("click", () =>{
                     let oceansWailQuantity = document.getElementById("oceansWailQuantity").value;
-                    fetch(`/cart?id=${customerInfo.id}&shell=oceansWail&quantity=${oceansWailQuantity}`, {method: "PUT"});
+                    fetch(`/cart?id=${customerId}&shell=oceansWail&quantity=${oceansWailQuantity}`, {method: "PUT"});
                     document.location.reload(true);
                 });
     
@@ -200,7 +300,7 @@ const populateShoppingCart = cart =>{
                 currentElement.appendChild(newElement);
 
                 document.getElementById("deleteOceansWail").addEventListener("click", () =>{
-                    fetch(`/cart?id=${customerInfo.id}&shell=oceansWail`, {method: "DELETE"});
+                    fetch(`/cart?id=${customerId}&shell=oceansWail`, {method: "DELETE"});
                     document.location.reload(true);
                 });
                 break;
@@ -225,6 +325,7 @@ const populateShoppingCart = cart =>{
                 newContent.type = "number";
                 newContent.setAttribute("id", "tinyTitanQuantity")
                 newContent.setAttribute("value", value);
+                newContent.setAttribute("min", "0");
                 newElement.appendChild(newContent);
                 currentElement.appendChild(newElement);
 
@@ -235,7 +336,7 @@ const populateShoppingCart = cart =>{
 
                 document.getElementById("updateTinyTitan").addEventListener("click", () =>{
                     let tinyTitanQuantity = document.getElementById("tinyTitanQuantity").value;
-                    fetch(`/cart?id=${customerInfo.id}&shell=tinyTitan&quantity=${tinyTitanQuantity}`, {method: "PUT"});
+                    fetch(`/cart?id=${customerId}&shell=tinyTitan&quantity=${tinyTitanQuantity}`, {method: "PUT"});
                     document.location.reload(true);
                 });
     
@@ -247,7 +348,7 @@ const populateShoppingCart = cart =>{
                 currentElement.appendChild(newElement);
 
                 document.getElementById("deleteTinyTitan").addEventListener("click", () =>{
-                    fetch(`/cart?id=${customerInfo.id}&shell=tinyTitan`, {method: "DELETE"});
+                    fetch(`/cart?id=${customerId}&shell=tinyTitan`, {method: "DELETE"});
                     document.location.reload(true);
                 });
                 break;
@@ -272,6 +373,7 @@ const populateShoppingCart = cart =>{
                 newContent.type = "number";
                 newContent.setAttribute("id", "sailorsBountyQuantity")
                 newContent.setAttribute("value", value);
+                newContent.setAttribute("min", "0");
                 newElement.appendChild(newContent);
                 currentElement.appendChild(newElement);
 
@@ -282,7 +384,7 @@ const populateShoppingCart = cart =>{
 
                 document.getElementById("updateSailorsBounty").addEventListener("click", () =>{
                     let sailorsBountyQuantity = document.getElementById("sailorsBountyQuantity").value;
-                    fetch(`/cart?id=${customerInfo.id}&shell=sailorsBounty&quantity=${sailorsBountyQuantity}`, {method: "PUT"});
+                    fetch(`/cart?id=${customerId}&shell=sailorsBounty&quantity=${sailorsBountyQuantity}`, {method: "PUT"});
                     document.location.reload(true);
                 });
     
@@ -294,7 +396,7 @@ const populateShoppingCart = cart =>{
                 currentElement.appendChild(newElement);
 
                 document.getElementById("deleteSailorsBounty").addEventListener("click", () =>{
-                    fetch(`/cart?id=${customerInfo.id}&shell=sailorsBounty`, {method: "DELETE"});
+                    fetch(`/cart?id=${customerId}&shell=sailorsBounty`, {method: "DELETE"});
                     document.location.reload(true);
                 });
                 break;
@@ -319,6 +421,7 @@ const populateShoppingCart = cart =>{
                 newContent.type = "number";
                 newContent.setAttribute("id", "whitePrincessQuantity");
                 newContent.setAttribute("value", value);
+                newContent.setAttribute("min", "0");
                 newElement.appendChild(newContent);
                 currentElement.appendChild(newElement);
 
@@ -329,7 +432,7 @@ const populateShoppingCart = cart =>{
 
                 document.getElementById("updateWhitePrincess").addEventListener("click", () =>{
                     let whitePrincessQuantity = document.getElementById("whitePrincessQuantity").value;
-                    fetch(`/cart?id=${customerInfo.id}&shell=whitePrincess&quantity=${whitePrincessQuantity}`, {method: "PUT"});
+                    fetch(`/cart?id=${customerId}&shell=whitePrincess&quantity=${whitePrincessQuantity}`, {method: "PUT"});
                     document.location.reload(true);
                 });
     
@@ -341,7 +444,7 @@ const populateShoppingCart = cart =>{
                 currentElement.appendChild(newElement);
 
                 document.getElementById("deleteWhitePrincess").addEventListener("click", () =>{
-                    fetch(`/cart?id=${customerInfo.id}&shell=whitePrincess`, {method: "DELETE"});
+                    fetch(`/cart?id=${customerId}&shell=whitePrincess`, {method: "DELETE"});
                     document.location.reload(true);
                 });
                 break;
@@ -351,11 +454,60 @@ const populateShoppingCart = cart =>{
     }
 }
 
-//Fetch Customer Info Functionality
-//Fetches customer information to be used on page
-let customerInfo = null;
+/*
+const populateShoppingCart = cart =>{
+    const customerId = cart.id;
+    delete cart.id;
 
-const fetchCustomerInfo = () =>{
+    let cartCount = 0;
+    let cartValues = Object.values(cart);
+    cartValues.forEach(element =>{
+        if(element != 0) cartCount += 1;
+    });
+
+    if(cartCount === 0){
+        let newElement = document.createElement("tr");
+        newElement.setAttribute("id", "currentRow");
+        let currentElement = document.getElementById("cartTable");
+        currentElement.appendChild(newElement);
+
+        let newContent = document.createTextNode("You're cart is empty");
+        currentElement.appendChild(newContent);
+    }
+
+    for(let [key, value] of Object.entries(cart)){
+        if(value === 0){
+            continue;
+        }else{
+            switch(key){
+                case "conch":
+                    buildShoppingCartList("/img/shell01.jpg", "The Conch", shellPrices["conch"], "conchQuantity", value, "updateConch", customerId, "deleteConch", "conch");
+                    break;
+                case "brokenheart":
+                    buildShoppingCartList("/img/shell02.jpg", "Broken Heart", shellPrices["brokenHeart"], "brokenHeartQuantity", value, "updateBrokenHeart", customerId, "deleteBrokenHeart", "brokenheart");
+                    break;
+                case "oceanswail":
+                    buildShoppingCartList("/img/shell03.jpg", "Ocean's Wail", shellPrices["oceansWail"], "oceansWailQuantity", value, "updateOceansWail", customerId, "deleteOceansWail", "oceanswail");
+                    break;
+                case "tinytitan":
+                    buildShoppingCartList("/img/shell04.jpg", "Tiny Titan", shellPrices["tinyTitan"], "tinyTitanQuantity", value, "updateTinyTitan", customerId, "deleteTinyTitan", "tinytitan");
+                    break;
+                case "sailorsbounty":
+                    buildShoppingCartList("/img/shell05.jpg", "Sailor's Bounty", shellPrices["sailorsBounty"], "sailorsBountyQuantity", value, "updateSailorsBounty", customerId, "deleteSailorsBounty", "sailorsbounty");
+                    break
+                case "whiteprincess":
+                    buildShoppingCartList("/img/shell05.jpg", "White Princess", shellPrices["whitePrincess"], "whitePrincessQuantity", value, "updateWhitePrincess", customerId, "deleteWhitePrincess", "whiteprincess");
+                    break;
+            }
+        }
+    }
+}
+*/
+//This code executes everything to build the page
+
+const buildPage = () =>{
+    let customerInfo = null;
+    let cart = null;
     fetch("/signUpLogIn", { method: "GET"})
     .then(response =>{
         if(response.ok) return response.json();
@@ -365,28 +517,17 @@ const fetchCustomerInfo = () =>{
     .then(response =>{
         customerInfo = response.customerInfo;
         document.getElementById("userCart").innerHTML = `${customerInfo.first_name}'s Shopping Cart`;
-    });
-}
+        fetch(`/cart?id=${customerInfo.id}`, { method: "GET"})
+        .then(response =>{
+            if(response.ok) return response.json();
 
-fetchCustomerInfo();
-
-//Fetch Customer Cart Info Funcionality
-//Fetches customer cart data such as what items they've selected and
-//how much of each item is in their cart. Once retreived, the table is
-//built by calling the previously built populateShoppingCart() function
-let cart = null;
-
-const fetchCustomerCart = () =>{
-    fetch("/cart", { method: "GET"})
-    .then(response =>{
-        if(response.ok) return response.json();
-
-        renderError(response);
-    })
-    .then(response =>{
+            renderError(response);
+        })
+        .then(response =>{
         cart = response;
         populateShoppingCart(cart);
+        });
     });
 }
 
-fetchCustomerCart();
+buildPage();
