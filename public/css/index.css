@@ -126,7 +126,7 @@ nav ul li:hover{
     font-size: 14px;
 }
 
-#logInContainer form button{
+#submit{
     padding: 5%;
     cursor: pointer;
     background:rgb(0, 0, 255);
@@ -135,7 +135,7 @@ nav ul li:hover{
     transition: 0.5s;
 }
 
-#logInContainer form button:hover{
+#submit:hover{
     background: yellow;
     color: black;
 }

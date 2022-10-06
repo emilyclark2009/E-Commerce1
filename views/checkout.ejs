@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Checkout</title>
     <link href="/css/checkout.css" type="text/css" rel="stylesheet">
+    <script src="/js/checkout.js" type="text/javascript" defer></script>
 </head>
 <body>
     <div id="wrapper">
@@ -22,6 +23,60 @@
                 </nav>
             </div>
         </div>
+        <div id="totalTable">
+            <table>
+                <tr id="headerRow">
+                    <th>Product</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                    <th>Total</th>
+                </tr>
+                <tr>
+                    <td>The Conch</td>
+                    <td>2</td>
+                    <td>$10.99</td>
+                    <td>$21.98</td>
+                </tr>
+                <tr total="subtotalRow">
+                    <td></td>
+                    <td></td>
+                    <td>Subtotal</td>
+                    <td id="subtotal">$21.98</td>
+                </tr>
+                <tr total="taxesRow">
+                    <td></td>
+                    <td></td>
+                    <td>Taxes</td>
+                    <td id="taxes">$2.14</td>
+                </tr>
+                <tr total="shippingRow">
+                    <td></td>
+                    <td></td>
+                    <td>Shipping & Handling</td>
+                    <td id="shipping">$4.99</td>
+                </tr>
+                <tr total="finalRow">
+                    <td></td>
+                    <td></td>
+                    <td>Final Total</td>
+                    <td id="finalTotal"><strong>$29.11</strong></td>
+                </tr>
+            </table>
+        </div>
+        <br>
+        <div class="addresses">
+            <form>
+                <p>Choose an address to ship to:</p>
+                <br>
+                <input type="radio" id="address1" name="address1" value="555 State Street, Citywalk, CA 99999">
+                <label for="address1">555 State Street, Citywalk, CA 99999</label>
+                <br>
+                <input type="radio" id="address2" name="address2" value="555 Moms House, Farmville, CA 88888">
+                <label for="address2">555 Moms House, Farmville, CA 88888</label>
+            </form>
+        </div>
+        <br>
+        <button id="placeOrder">Place Order</button>
     </div>
 </body>
 </html>

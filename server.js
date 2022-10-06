@@ -25,18 +25,6 @@ app.use("/signUpLogIn", signUpLogInRouter);
 
 app.use("/cart", cartRouter);
 
-
-    /*
-    pool.query("SELECT * FROM customers;", (err, results)=>{
-        if (err){
-            console.log('all bad')
-            return console.log(err)
-        }
-    console.log('all good')
-        console.log(results.rows)
-    }) */
-
-
 const PORT = process.env.PORT || 4001;
 
 app.listen(PORT, () => {
