@@ -18,7 +18,7 @@ const updateGreeting = () =>{
         console.log(customerInfo);
         if(loggedIn){
             document.getElementById("helloUser").innerHTML = `Welcome ${customerInfo.first_name}!`;
-        }
+        } 
     });
 }
 
