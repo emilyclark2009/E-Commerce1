@@ -48,7 +48,7 @@ const updateGreeting = () =>{
                 customerInfo = null;
                 loggedIn = false;
                 fetch("/signUpLogin/logOut", {method: "PUT"});
-                window.location.href = "/pageRouter/index";
+                window.location.href = "/pageRouter/loggedOut";
             });
         }else{
             document.getElementById("helloUser").innerHTML = `Welcome!`;
