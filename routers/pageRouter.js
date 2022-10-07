@@ -29,4 +29,8 @@ pageRouter.get("/addNewAddress", (req, res, next) =>{
     res.render('addNewAddress.ejs');
 });
 
+pageRouter.get("/loggedOut", (req, res, next) =>{
+    res.render('loggedOut.ejs');
+});
+
 module.exports = pageRouter;
