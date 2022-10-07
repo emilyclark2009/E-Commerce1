@@ -112,3 +112,69 @@ const buildCheckout = () =>{
 }
 
 buildCheckout();
+
+const buildAddressList = customerAddresses =>{
+    delete customerAddresses.id;
+
+    for(let [key, value] of Object.entries(customerAddresses)){
+        if(value != "NULL"){
+            let newElement = document.createElement("input");
+            let currentElement = document.getElementById("addressForm");
+            newElement.setAttribute("type", "radio");
+            newElement.setAttribute("id", key);
+            newElement.setAttribute("name", "address");
+            newElement.setAttribute("value", value);
+            currentElement.appendChild(newElement);
+
+            newElement = document.createElement("label");
+            newElement.setAttribute("for", key);
+            newElement.innerHTML = value;
+            currentElement.appendChild(newElement);
+
+            newElement = document.createElement("br");
+            currentElement.appendChild(newElement);
+        }
+    }
+}
+
+//Builds addresses box
+
+const buildAddressesBox = async() =>{
+    let customerInfo = null;
+    let addresses = null;
+    try{
+        const response = await fetch("/signUpLogIn", { method: "GET"});
+        if(response.ok){
+            const jsonResponse = await response.json();
+            customerInfo = jsonResponse.customerInfo;
+            fetch(`/addresses?id=${customerInfo.id}`, { method: "GET"})
+            .then(response =>{
+                if(response.ok) return response.json();
+
+                renderError(response);
+            })
+            .then(response =>{
+                addresses = response;
+                delete addresses.id;
+                let addressCount = 0;
+                let addressValues = Object.values(addresses);
+                addressValues.forEach(element =>{
+                    if(element != "NULL") addressCount += 1;
+                });
+                if(addressCount === 0){
+                    let newElement = document.createElement("a");
+                    newElement.setAttribute("href", "/pageRouter/account");
+                    let currentElement = document.getElementById("addressForm");
+                    currentElement.appendChild(newElement);
+                    newElement.innerHTML = "Add an address to your profile now";
+                }else{
+                    buildAddressList(addresses);
+                }
+            });
+        }else throw new Error("Request failed!");
+    }catch(error){
+        console.log(error);
+    }
+}
+
+buildAddressesBox();

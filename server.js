@@ -37,6 +37,17 @@ app.use("/signUpLogIn", signUpLogInRouter);
 
 app.use("/cart", cartRouter);
 
+app.get("/addresses", (req, res, next) =>{
+    pool.query('SELECT * FROM addresses WHERE id = $1', [req.query.id], (err, results) =>{
+        if(err){
+            console.log(err);
+        }else{
+            const addresses = results.rows[0];
+            res.send(addresses);
+        }
+    });
+});
+
 const PORT = process.env.PORT || 4001;
 
 app.listen(PORT, () => {
