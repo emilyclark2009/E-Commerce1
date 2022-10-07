@@ -4,6 +4,7 @@ const { pool } = require('./db.js')
 const pageRouter = require("./routers/pageRouter.js");
 const cartRouter = require("./routers/cartRouter.js");
 const signUpLogInRouter = require("./routers/signUpLogInRouter.js");
+const addressRouter = require("./routers/addressRouter.js");
 const passport = require("passport")
 const session = require("express-session")
 
@@ -36,6 +37,10 @@ app.use("/pageRouter", pageRouter);
 app.use("/signUpLogIn", signUpLogInRouter);
 
 app.use("/cart", cartRouter);
+
+app.use("/addresses", addressRouter);
+
+
 
 const PORT = process.env.PORT || 4001;
 

@@ -39,7 +39,7 @@ passport.serializeUser((user, done)=>{
 })
 passport.deserializeUser((id, done)=>{
     pool.query("SELECT * FROM customers WHERE id=$1", [id], (err, results)=>{
-        console.log(results.rows) // for testing purposes
+        //console.log(results.rows) // for testing purposes
         done(null, results.rows[0]["first_name"])
     })
 })
@@ -86,6 +86,7 @@ signUpLogInRouter.post("/", (req,res)=>{
                 login.customerInfo = results.rows[0];
                 login.loggedIn = true;
                 pool.query('INSERT INTO cart (id, conch, brokenheart, oceanswail, tinytitan, sailorsbounty, whiteprincess) VALUES($1,$2,$3,$4,$5,$6,$7)', [login.customerInfo.id, 0, 0, 0, 0, 0, 0]);
+                pool.query('INSERT INTO addresses (id, address1, address2, address3, address4, address5) VALUES($1,$2,$3,$4,$5,$6)', [login.customerInfo.id, "NULL", "NULL", "NULL", "NULL", "NULL"]);
                 res.render('signUpConfirm.ejs');
             })
         }
