@@ -33,4 +33,8 @@ pageRouter.get("/loggedOut", (req, res, next) =>{
     res.render('loggedOut.ejs');
 });
 
+pageRouter.get("/updateEmail", (req, res, next) =>{
+    res.render('updateEmail.ejs');
+});
+
 module.exports = pageRouter;
