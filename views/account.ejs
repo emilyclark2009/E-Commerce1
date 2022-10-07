@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Account</title>
     <link href="/css/account.css" type="text/css" rel="stylesheet">
+    <script src="/js/account.js" type="text/javascript" defer></script>
 </head>
 <body>
     <div id="wrapper">
@@ -30,12 +31,10 @@
             <br>
             <p>Current Addresses:</p>
             <br>
-            <ul>
-                <li>555 State Street, Citywalk, CA 99999<button>Delete</button></li>
-                <li>555 Moms House, Farmville, CA 88888<button>Delete</button></li>
+            <ul id="addressList">
             </ul>
             <br>
-            <a href="#">Add New Address</a>
+            <a href="/pageRouter/addNewAddress" id="addNewAddress">Add New Address</a>
         </div>
     </div>
 </body>

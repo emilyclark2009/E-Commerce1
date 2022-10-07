@@ -117,7 +117,7 @@ const buildAddressList = customerAddresses =>{
     delete customerAddresses.id;
 
     for(let [key, value] of Object.entries(customerAddresses)){
-        if(value != "NULL"){
+        if(value != null){
             let newElement = document.createElement("input");
             let currentElement = document.getElementById("addressForm");
             newElement.setAttribute("type", "radio");
@@ -159,7 +159,7 @@ const buildAddressesBox = async() =>{
                 let addressCount = 0;
                 let addressValues = Object.values(addresses);
                 addressValues.forEach(element =>{
-                    if(element != "NULL") addressCount += 1;
+                    if(element != null) addressCount += 1;
                 });
                 if(addressCount === 0){
                     let newElement = document.createElement("a");
