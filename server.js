@@ -4,6 +4,7 @@ const { pool } = require('./db.js')
 const pageRouter = require("./routers/pageRouter.js");
 const cartRouter = require("./routers/cartRouter.js");
 const signUpLogInRouter = require("./routers/signUpLogInRouter.js");
+const addressRouter = require("./routers/addressRouter.js");
 const passport = require("passport")
 const session = require("express-session")
 
@@ -37,16 +38,9 @@ app.use("/signUpLogIn", signUpLogInRouter);
 
 app.use("/cart", cartRouter);
 
-app.get("/addresses", (req, res, next) =>{
-    pool.query('SELECT * FROM addresses WHERE id = $1', [req.query.id], (err, results) =>{
-        if(err){
-            console.log(err);
-        }else{
-            const addresses = results.rows[0];
-            res.send(addresses);
-        }
-    });
-});
+app.use("/addresses", addressRouter);
+
+
 
 const PORT = process.env.PORT || 4001;
 
