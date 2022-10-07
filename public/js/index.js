@@ -1,9 +1,31 @@
+//Log In Box Functionality
+//Clicking on "Log In" will execute the following code. This code allows
+//for the log in box to appear for a user to type in their username
+//and password
+
+const logIn = document.getElementById("logIn");
+const logInContainerClose = document.getElementById("logInContainerClose");
+const logInSubmit = document.getElementById("submit");
+const welcomeContainer = document.getElementById("welcome");
+
+const openLogInBox = () =>{
+    document.getElementById("logInContainer").style.top = "17%";
+}
+
+logIn.addEventListener("click", openLogInBox);
+
+logInContainerClose.addEventListener("click", ()=>{
+    document.getElementById("logInContainer").style.top = "-100vh";
+});
+
 //Update Log In Status Functionality
 //Updates Welcome message to include users name. Also tells the page that
 //the user is logged in as well as allows the page to access customer
-//information
+//information. Also dynamically changes the "Log In" and "Sign Up" links
+//to "Log Out" and "Account"
 let loggedIn = false;
 let customerInfo = null;
+const signUp = document.getElementById("signUp");
 
 const updateGreeting = () =>{
     fetch("/signUpLogIn", { method: "GET"})
@@ -18,30 +40,27 @@ const updateGreeting = () =>{
         console.log(customerInfo);
         if(loggedIn){
             document.getElementById("helloUser").innerHTML = `Welcome ${customerInfo.first_name}!`;
-        } 
+            signUp.innerHTML = "Account";
+            signUp.setAttribute("href", "/pageRouter/account");
+            logIn.innerHTML = "Log Out";
+            logIn.removeEventListener("click", openLogInBox);
+            logIn.addEventListener("click", () =>{
+                customerInfo = null;
+                loggedIn = false;
+                fetch("/signUpLogin/logOut", {method: "PUT"});
+                window.location.href = "/pageRouter/index";
+            });
+        }else{
+            document.getElementById("helloUser").innerHTML = `Welcome!`;
+            signUp.innerHTML = "Sign Up";
+            signUp.setAttribute("href", "/pageRouter/signup");
+            logIn.innerHTML = "Log In";
+            logIn.addEventListener("click", openLogInBox);
+        }
     });
 }
 
 updateGreeting();
-
-//Log In Box Functionality
-//Clicking on "Log In" will execute the following code. This code allows
-//for the log in box to appear for a user to type in their username
-//and password
-
-const logIn = document.getElementById("logIn");
-const logInContainerClose = document.getElementById("logInContainerClose");
-const logInSubmit = document.getElementById("submit");
-const welcomeContainer = document.getElementById("welcome");
-
-
-logIn.addEventListener("click", ()=>{
-    document.getElementById("logInContainer").style.top = "17%";
-})
-
-logInContainerClose.addEventListener("click", ()=>{
-    document.getElementById("logInContainer").style.top = "-100vh";
-})
 
 //Shopping Cart Link Functionality
 //Checks if user is logged in before redirecting to shopping cart page

@@ -25,4 +25,8 @@ pageRouter.get("/signUpConfirm", (req, res) =>{
     res.render('signUpConfirm.ejs')
 });
 
+pageRouter.get("/addNewAddress", (req, res, next) =>{
+    res.render('addNewAddress.ejs');
+});
+
 module.exports = pageRouter;

@@ -97,6 +97,11 @@ signUpLogInRouter.get('/', (req, res, next) =>{
     res.send(login);
 });
 
+signUpLogInRouter.put('/logOut', (req, res, next) =>{
+    login.loggedIn = false;
+    login.customerInfo = '';
+});
+
 signUpLogInRouter.get('/logIn', passport.authenticate("local", {failureRedirect: "/"}), (req,res)=>{
     login.loggedIn = true;
     pool.query('SELECT * FROM customers WHERE email = $1', [req.query.email], (err, results) =>{
