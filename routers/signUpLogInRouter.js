@@ -98,6 +98,12 @@ signUpLogInRouter.get('/', (req, res, next) =>{
 });
 
 signUpLogInRouter.put('/logOut', (req, res, next) =>{
+    // added to properly log user out through passport.js
+    req.logOut((err)=>{
+        if(err){
+            return next(err)
+        }
+    })
     login.loggedIn = false;
     login.customerInfo = '';
 });
