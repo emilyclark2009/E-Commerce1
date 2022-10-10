@@ -8,6 +8,11 @@ const addressRouter = require("./routers/addressRouter.js");
 const passport = require("passport")
 const session = require("express-session")
 
+//error handling middleware
+app.use((err,req,res, next)=>{
+    console.log(err)
+})
+
 app.use(session({
     secret:"test",
     saveUninitialized: true,
